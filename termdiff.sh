@@ -6,7 +6,7 @@ dir="/tmp/termdiff/$PPID"
 # Create temp dir
 mkdir -p "$dir"
 
-# TODO: Save stderr too?
+# Run command passed as args, store output in temp dir
 $@ > "$dir/new"
 
 # If there's a previously stored output
