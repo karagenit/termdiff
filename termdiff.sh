@@ -32,6 +32,13 @@ while [[ $1 == -* ]]; do
     shift
 done
 
+# Make sure we were given some command
+if [[ ! $1 ]]
+then
+    echo "Must provide some command to termdiff!"
+    exit
+fi
+
 # Determine where to save output
 if [[ "$global" == "true" ]]
 then
@@ -41,10 +48,10 @@ else
     dir="/tmp/termdiff/$PPID"
 fi
 
-# Create temp dir
+# Create temporary dir
 mkdir -p "$dir"
 
-# Run command passed as args, store output, determine how/what to save & print
+# Run command passed as args, store/display output/errors
 if [[ "$output" == "true" && "$errors" == "true" ]]
 then
     $@ |& tee "$dir/new"
@@ -58,7 +65,7 @@ else # Both are False
     $@ > "$dir/new"
 fi
 
-# If there's a previously stored output
+# If there's a previously stored output, and we want a diff
 if [[ -f "$dir/old" && "$diff" == "true" ]]
 then
     # Diff outputs
