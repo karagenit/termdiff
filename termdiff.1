@@ -1,0 +1,42 @@
+.TH termdiff 1 "12 June 2018" "version 2.0.0" "termdiff man page"
+.SH NAME
+termdiff - diff outputs of bash commands at different times
+.SH SYNOPSIS
+.B termdiff
+[OPTION]... COMMAND...
+.SH DESCRIPTION
+.B termdiff
+is used to store the output of a given bash command and compare it (using diff) to the output of whatever command was previously run with termdiff.
+.PP
+Diffs are stored based on parent PID, meaning diffs are stored on a per-terminal basis, so command outputs (by default) can't be diffed against output from other terminals.
+.SH OPTIONS
+.B -t, --temporary
+.RS
+Don't save/cache current output for future diffs.
+.RE
+.PP
+.B -o, --output
+.RS
+Display command output to the console (stdout) - disabled by default.
+.RE
+.PP
+.B -s, --silent
+.RS
+Don't display diff between current and cached command output.
+.RE
+.PP
+.B -e, --errors
+.RS
+Save & diff stderr as well as stdout.
+.RE
+.PP
+.B -g, --global
+.RS
+Saves & diffs output to global (all terminals) cache, allowing commands in different terminals to be diffed.
+.RE
+.SH BUGS
+Report bugs here: https://github.com/karagenit/termdiff/issues
+.SH AUTHOR
+Caleb Smith <calebsmith1440@outlook.com>
+.SH SEE ALSO
+diff(1)
