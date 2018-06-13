@@ -1,20 +1,73 @@
 #!/usr/bin/env bash
 
-# PPID is PID of Parent i.e. terminal that called the script
-dir="/tmp/termdiff/$PPID"
+# Configs
+save="true"
+output="false"
+diff="true"
+errors="false"
+global="false"
+
+# Set Configs by command line args
+while [[ $1 == -* ]]; do
+    case $1 in
+        "-t" | "--temporary")
+            save="false"
+            ;;
+        "-o" | "--output")
+            output="true"
+            ;;
+        "-s" | "--silent")
+            diff="false"
+            ;;
+        "-e" | "--errors")
+            errors="true"
+            ;;
+        "-g" | "--global")
+            global="true"
+            ;;
+        *)
+            echo "Unknown Argument: $1"
+            exit
+    esac
+    shift
+done
+
+# Determine where to save output
+if [[ "$global" == "true" ]]
+then
+    dir="/tmp/termdiff/1"
+else
+    # PPID is PID of Parent i.e. terminal that called the script
+    dir="/tmp/termdiff/$PPID"
+fi
 
 # Create temp dir
 mkdir -p "$dir"
 
-# Run command passed as args, store output in temp dir
-$@ > "$dir/new"
+# Run command passed as args, store output, determine how/what to save & print
+if [[ "$output" == "true" && "$errors" == "true" ]]
+then
+    $@ |& tee "$dir/new"
+elif [[ "$output" == "true" ]] # Errors is false
+then
+    $@ | tee "$dir/new"
+elif [[ "$errors" == "true" ]] # Output is false
+then
+    $@ &> "$dir/new"
+else # Both are False
+    $@ > "$dir/new"
+fi
 
 # If there's a previously stored output
-if [ -f "$dir/old" ]
+if [[ -f "$dir/old" && "$diff" == "true" ]]
 then
     # Diff outputs
     diff "$dir/old" "$dir/new"
 fi
 
-# Store last output
-mv "$dir/new" "$dir/old"
+# If we want to save the current output for later diffing
+if [[ "$save" == "true" ]]
+then
+    # Store last output
+    mv "$dir/new" "$dir/old"
+fi
