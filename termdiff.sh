@@ -69,7 +69,7 @@ fi
 if [[ -f "$dir/old" && "$diff" == "true" ]]
 then
     # Diff outputs
-    diff "$dir/old" "$dir/new"
+    diff -u --color=always "$dir/old" "$dir/new"
 fi
 
 # If we want to save the current output for later diffing
