@@ -10,11 +10,13 @@ To install, use the provided Makefile:
 $ sudo make install
 ```
 
-The script will be copied to `/usr/local/bin`.
-
 Similarly, to uninstall, simply use the `uninstall` make target.
 
-> **NOTE:** To install/uninstall the man pages, the scripts must be run with `sudo`.
+> **NOTE:** To install/uninstall the man pages, make *must* be run with `sudo`.
+
+### Debian
+
+You can use [this repo](https://github.com/karagenit/termdiff.deb) to easily build a `.deb` file for simpler installation/removal.
 
 # Usage
 
@@ -35,7 +37,7 @@ $ termdiff date
 > Mon Jun 11 21:48:16 EDT 2018
 ```
 
-> **NOTE:** diffs are stored on a per-terminal basis, so commands that are `termdiff`'d in different terminals won't interfere (but you also can't diff the output of a command in another terminal).
+> **NOTE:** diffs are stored on a per-terminal basis, so commands that you `termdiff` in different terminals won't interfere.
 
 ### Options
 
