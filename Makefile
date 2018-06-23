@@ -11,7 +11,7 @@ clean:
 	
 install: all
 	install -D termdiff.sh $(DESTDIR)$(bindir)/termdiff
-	install -D -m 0644 termdiff.1 $(DESTDIR)$(man1dir)
+	install -D -m 0644 termdiff.1 $(DESTDIR)$(man1dir)/termdiff.1
 
 uninstall:
 	rm $(DESTDIR)$(bindir)/termdiff
