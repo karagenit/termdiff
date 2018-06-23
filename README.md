@@ -31,10 +31,9 @@ This will store the output of the command in a temporary file and compare the ou
 ```
 $ termdiff date
 $ termdiff date
-1c1
-< Mon Jun 11 21:48:13 EDT 2018
----
-> Mon Jun 11 21:48:16 EDT 2018
+@@ -1 +1 @@
+-Sat Jun 23 15:11:26 EDT 2018
++Sat Jun 23 15:11:28 EDT 2018
 ```
 
 > **NOTE:** diffs are stored on a per-terminal basis, so commands that you `termdiff` in different terminals won't interfere.
