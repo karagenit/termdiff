@@ -4,14 +4,15 @@ This script lets you diff the outputs of bash commands run at different times.
 
 # Installation
 
-Use the provided bash scripts:
+To install, use the provided Makefile:
 
 ```
-$ ./install
-$ ./uninstall
+$ sudo make install
 ```
 
 The script will be copied to `/usr/local/bin`.
+
+Similarly, to uninstall, simply use the `uninstall` make target.
 
 > **NOTE:** To install/uninstall the man pages, the scripts must be run with `sudo`.
 
@@ -59,4 +60,4 @@ termdiff [OPTION]... COMMAND...
 
 ### Cleanup
 
-To remove all of the temporary cache files (stored in `/tmp/termdiff`), you can use the provided `clean.sh` script.
+To remove all of the temporary cache files (stored in `/tmp/termdiff`), you can use `make clean`.
